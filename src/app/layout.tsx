@@ -4,6 +4,9 @@ import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { Providers } from "~/app/providers";
+import { Header } from "~/app/_components/header";
+import { type ReactNode } from "react";
+import { Footer } from "~/app/_components/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,16 +19,16 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="dark">
       <body className={`font-sans ${inter.variable}`}>
         <TRPCReactProvider>
-          <Providers>{children}</Providers>
+          <Providers>
+            <Header />
+            <main className="py-3">{children}</main>
+            <Footer />
+          </Providers>
         </TRPCReactProvider>
       </body>
     </html>
